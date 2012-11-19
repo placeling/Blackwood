@@ -1,14 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Blackwood</title>
+  <title><%= @base_user %></title>
+
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+
   <%= csrf_meta_tags %>
+
+  <link rel="stylesheet" href="/style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
+
+  <script type="text/javascript">
+
+      $(document).ready(function () {
+          if (navigator.geolocation) {
+              var timeoutVal = 10 * 1000 * 1000;
+              var watch_id = navigator.geolocation.watchPosition(
+                      success_handler,
+                      error_handler,
+                      { enableHighAccuracy:true, timeout:timeoutVal, maximumAge:10 }
+              );
+          }
+      });
+
+      function success_handler(position) {
+          /* Get the location data */
+          latitude = position.coords.latitude;
+          longitude = position.coords.longitude;
+          accuracy = position.coords.accuracy;
+
+          $.cookie("lat", latitude);
+          $.cookie("lng", longitude);
+          $.cookie("accuracy", accuracy);
+      }
+
+      function error_handler(error) {
+      }
+
+  </script>
+
 </head>
 <body>
+<div class='container' style="width:100%">
+  <div class="navbar">
+    <div class="navbar-inner">
 
-<%= yield %>
+      <a class="brand" href="/" style="padding: 5px 20px 5px 20px;">
+        <img width="44" src="<%= @user.thumb_url %>">
+      </a>
 
+      <div class="brand" href="/" style="padding: 18px 20px 5px 20px;">
+        <%= @user.username %>
+      </div>
+
+
+      <%= yield_content :navbar_menu %>
+    </div>
+  </div>
+
+  <div>
+    <%= yield %>
+    <% if @publisher.footerpng %>
+        <div class="row-fluid visible-phone">
+          <div class="span12">
+            <div style="text-align: center;">
+              <img src="/images/<%= @publisher.footerpng %>"/>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
 </body>
 </html>

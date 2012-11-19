@@ -1,19 +1,34 @@
 development:
   host: localhost
-  database: blackwood_development
+  database: chatham_development
+  #autocreate_indexes: true
+  raise_not_found_error: false
+  allow_dynamic_fields: false
+  identity_map_enabled: true
+
 
 test:
   host: localhost
-  database: blackwood_test
+  database: chatham_test<%= ENV['TEST_ENV_NUMBER'] %>
+  autocreate_indexes: true
+  raise_not_found_error: false
+  allow_dynamic_fields: false
+  identity_map_enabled: true
+
+staging:
+  host: localhost
+  database: chatham_staging
+  raise_not_found_error: false
+  identity_map_enabled: true
+  pool_size: 2
 
 # set these environment variables on your prod server
 production:
-  host: <%= ENV['MONGOID_HOST'] %>
-  port: <%= ENV['MONGOID_PORT'] %>
-  username: <%= ENV['MONGOID_USERNAME'] %>
-  password: <%= ENV['MONGOID_PASSWORD'] %>
-  database: <%= ENV['MONGOID_DATABASE'] %>
-  # slaves:
+  host: ip-10-91-3-30.ec2.internal
+  database: chatham_production
+  raise_not_found_error: false
+  identity_map_enabled: true
+  pool_size: 2
   #   - host: slave1.local
   #     port: 27018
   #   - host: slave2.local
