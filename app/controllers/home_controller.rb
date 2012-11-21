@@ -40,10 +40,7 @@ class HomeController < ApplicationController
   end
 
   def place
-
-    user = User.find_by_username(@base_user)
-    place = Place.find(params[:id])
-    @perspective = user.perspective_for_place(place)
+    @perspective = Perspective.for_user_and_place( @base_user, params[:id] )
 
     respond_to do |format|
       format.html

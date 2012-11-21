@@ -11,6 +11,17 @@ class Perspective < ActiveResource::Base
   end
 
 
+  def self.for_user_and_place( username, place_id )
+    place = Place.find(place_id, :params => { :rf => username } )
+
+    perspective = place.referring_perspectives.first
+    perspective.place = place
+
+    return perspective
+
+  end
+
+
   def as_json( context)
     #this is necessary to prevent the double nesting that seems to happen with activeresource as_json default calls
     attributes = self.attributes

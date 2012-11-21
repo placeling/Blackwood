@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="span6">
-        <% @perspective.active_photos.each do |photo| %>
+        <% @perspective.photos.each do |photo| %>
             <a href="<%= photo.main_url %>" class="lightbox">
               <div class="image_holder">
                 <img src="<%= photo.mosaic_3_1_url %>" class="img-polaroid">
@@ -52,7 +52,7 @@
 
   <div class="span4 hidden-phone">
     <% if @publisher.wellpng %>
-        <img src="/images/<%= @publisher.wellpng %>"/>
+        <%=  image_tag( @publisher.wellpng ) %>
     <% end %>
   </div>
 </div>
