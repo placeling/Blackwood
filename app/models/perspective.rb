@@ -1,7 +1,7 @@
 class Perspective < ActiveResource::Base
   # To change this template use File | Settings | File Templates.
 
-  self.site = "http://localhost:3000"
+  self.site = BLACKWOOD_CONFIG['base_host']
   self.prefix = "/users/:user_id/"
 
 

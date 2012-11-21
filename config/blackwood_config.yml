@@ -1,0 +1,12 @@
+development:
+  base_host: "http://localhost:3000"
+
+test:
+  base_host: "http://localhost:3000"
+
+staging:
+  base_host: "https://staging.placeling.com"
+
+production:
+  base_host: "https://api.placeling.com"
+
