@@ -42,7 +42,7 @@ class HomeController < ApplicationController
   def place
 
     user = User.find_by_username(@base_user)
-    place = Place.forgiving_find(params[:id])
+    place = Place.find(params[:id])
     @perspective = user.perspective_for_place(place)
 
     respond_to do |format|
@@ -51,12 +51,10 @@ class HomeController < ApplicationController
   end
 
   def mapdata
-
-
-    @perspectives = get_perspectives(@user, params[:category]).limit(0).entries
+    @perspectives = get_perspectives(@user, params[:category])
 
     respond_to do |format|
-      format.json{ render :json => {:perspective => @perspectives.as_json({:user_view => true, :bounds => true}) } }
+      format.json{ render :json => {:perspectives => @perspectives } }
     end
 
   end
