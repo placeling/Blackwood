@@ -36,7 +36,7 @@
   </div>
   <div class="span4 hidden-phone">
     <% if @publisher.wellpng %>
-        <img src="/images/<%= @publisher.wellpng %>"/>
+        <%= image_tag( @publisher.wellpng) %>
     <% end %>
   </div>
 </div>

@@ -5,13 +5,12 @@ gem 'rails', '3.2.2'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "mongoid", "~> 2.4.8"
-
 # Gems used only for assets and not required
 # in production environments by default.
 
 gem 'therubyracer'
 gem 'less-rails'
+gem "geocoder"
 
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
@@ -34,7 +33,7 @@ gem "twitter-bootstrap-rails"
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'debugger'

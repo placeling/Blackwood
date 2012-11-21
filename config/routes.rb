@@ -2,6 +2,7 @@ require 'subdomain'
 
 Blackwood::Application.routes.draw do
 
+  match "category/:category" => redirect("/category/%{category}/list")
   match "category/:category/list" => 'home#list'
   match "category/:category/map" => 'home#map'
   match "category/:category/mapdata" => 'home#mapdata'

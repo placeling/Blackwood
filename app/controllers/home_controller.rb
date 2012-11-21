@@ -2,7 +2,6 @@ class HomeController < ApplicationController
 
 
   def index
-
     respond_to do |format|
       format.html
     end
@@ -10,7 +9,7 @@ class HomeController < ApplicationController
 
   def list
 
-    @perspectives = get_perspectives(@user, params[:category]).entries
+    @perspectives = get_perspectives(@user, params[:category])
 
     if @lat && @lng
       @perspectives.each do |perspective|

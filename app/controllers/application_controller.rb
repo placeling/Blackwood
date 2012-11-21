@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  include ApplicationHelper
 
   before_filter :instance_setup
 
@@ -8,7 +9,7 @@ class ApplicationController < ActionController::Base
   def instance_setup
 
     @base_user = request.subdomain
-    @user = User.find_by_username( @base_user )
+    @user = User.find( @base_user )
 
     if @user.publisher.nil?
       throw :halt, [404, "Not found"]
