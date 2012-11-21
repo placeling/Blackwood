@@ -41,7 +41,7 @@
         <% @perspective.photos.each do |photo| %>
             <a href="<%= photo.main_url %>" class="lightbox">
               <div class="image_holder">
-                <img src="<%= photo.mosaic_3_1_url %>" class="img-polaroid">
+                <%=  image_tag( photo.square_url, :class=>"img-polaroid" ) %>
               </div>
             </a>
         <% end %>
