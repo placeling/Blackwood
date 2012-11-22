@@ -12,7 +12,7 @@ class Perspective < ActiveResource::Base
 
 
   def self.for_user_and_place( username, place_id )
-    place = Place.find(place_id, :params => { :rf => username } )
+    place = Place.find_for_user(place_id,  username )
 
     perspective = place.referring_perspectives.first
     perspective.place = place
