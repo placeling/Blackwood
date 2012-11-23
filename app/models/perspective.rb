@@ -2,12 +2,10 @@ class Perspective < ActiveResource::Base
   # To change this template use File | Settings | File Templates.
 
   self.site = BLACKWOOD_CONFIG['base_host']
-  self.prefix = "/users/:user_id/"
+  self.prefix = "/publishers/:publisher_id/publisher_categories/:cat/"
 
-
-  def self.query_near_for_user(user, lat, lng, tags)
-
-    Perspective.find(:all, :params => { :user_id => user.username, :lat => lat, :lng => lng } )
+  def self.query_near_for_user(username, category, lat, lng)
+    Perspective.find(:all, :params => {:publisher_id => username, :cat => category , :lat => lat, :lng => lng} )
   end
 
 

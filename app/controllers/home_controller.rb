@@ -8,8 +8,7 @@ class HomeController < ApplicationController
   end
 
   def list
-
-    @perspectives = get_perspectives(@user, params[:category])
+    @perspectives = Perspective.query_near_for_user(@base_user, params[:category],  @lat, @lng)
 
     if @lat && @lng
       @perspectives.each do |perspective|
@@ -48,7 +47,7 @@ class HomeController < ApplicationController
   end
 
   def mapdata
-    @perspectives = get_perspectives(@user, params[:category])
+    @perspectives = Perspective.query_near_for_user(@base_user, params[:category],  @lat, @lng)
 
     respond_to do |format|
       format.json{ render :json => {:perspectives => @perspectives } }
