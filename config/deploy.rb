@@ -5,7 +5,6 @@ set :application, "blackwood"
 set :rvm_ruby_string, "ruby-1.9.3-p125"
 require "rvm/capistrano" # Load RVM's capistrano plugin.
 
-before 'deploy:setup', 'ubuntu:required_packages'
 before 'deploy:setup', 'rvm:install_rvm'
 before 'deploy:setup', 'rvm:install_ruby'
 
