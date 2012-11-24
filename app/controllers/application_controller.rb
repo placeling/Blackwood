@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def instance_setup
 
-    @base_user = request.subdomain
+    @base_user = request.subdomain.split(".")[0]
     @user = User.find( @base_user )
 
     if @user.publisher.nil?
