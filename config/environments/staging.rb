@@ -14,6 +14,8 @@ Blackwood::Application.configure do
   # Compress JavaScripts and CSS
   config.assets.compress = true
 
+  config.assets.initialize_on_precompile = false
+
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = true
 
@@ -25,16 +27,13 @@ Blackwood::Application.configure do
 
   # Specifies the header that your server uses for sending files
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
-  # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # See everything in the log (default is :info)
   # config.log_level = :debug
 
   # Prepend all log lines with the following tags
-  # config.log_tags = [ :subdomain, :uuid ]
+  config.log_tags = [ :subdomain ]
 
   # Use a different logger for distributed setups
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
