@@ -12,6 +12,9 @@ gem 'therubyracer'
 gem 'less-rails'
 gem "geocoder"
 
+gem "rspec-rails", "~> 2.8.1" #needs these outside to prevent rake break
+gem 'ci_reporter'
+
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
