@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
 
+  before_filter :instance_setup, :except=>[:ping]
 
   def index
     respond_to do |format|
@@ -51,6 +52,14 @@ class HomeController < ApplicationController
 
     respond_to do |format|
       format.json{ render :json => {:perspectives => @perspectives } }
+    end
+
+  end
+
+  def ping
+
+    respond_to do |format|
+      format.html {render :ping, :layout => false}
     end
 
   end

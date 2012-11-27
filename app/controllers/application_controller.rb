@@ -2,10 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   include ApplicationHelper
 
-  before_filter :instance_setup
-
-
-
   def instance_setup
 
     @base_user = request.subdomain.split(".")[0]
