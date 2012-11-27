@@ -2,7 +2,7 @@ require 'bundler/capistrano'
 
 set :application, "blackwood"
 
-set :rvm_ruby_string, "ruby-1.9.3-p327"
+set :rvm_ruby_string, "ruby-1.9.3-p125"
 require "rvm/capistrano" # Load RVM's capistrano plugin.
 
 before 'deploy:setup', 'rvm:install_rvm'
