@@ -8,5 +8,5 @@ staging:
   base_host: "https://staging.placeling.com"
 
 production:
-  base_host: "https://api.placeling.com"
+  base_host: "https://ip-10-112-241-90.ec2.internal"
 
