@@ -5,7 +5,7 @@ test:
   base_host: "http://localhost:3000"
 
 staging:
-  base_host: "https://staging.placeling.com"
+  base_host: "https://localhost"
 
 production:
   base_host: "https://ip-10-112-241-90.ec2.internal"
