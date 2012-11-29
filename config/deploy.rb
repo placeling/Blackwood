@@ -10,6 +10,8 @@ before 'deploy:setup', 'rvm:install_ruby'
 before 'deploy:setup', "ubuntu:required_packages"
 before 'deploy:setup', 'ubuntu:service_gems'
 
+after "deploy:create_symlink", "deploy:restart_workers"
+
 task :production do
   set :gateway, 'beagle.placeling.com:11235'
   server '10.122.167.104', :app, :web, :db, :scheduler, :primary => true
@@ -51,6 +53,15 @@ namespace :ubuntu do
 end
 
 
+def run_remote_rake(rake_cmd)
+  rake_args = ENV['RAKE_ARGS'].to_s.split(',')
+  cmd = "cd #{fetch(:latest_release)} && #{fetch(:rake, "rake")} RAILS_ENV=#{fetch(:rails_env, "production")} #{rake_cmd}"
+  cmd += "['#{rake_args.join("','")}']" unless rake_args.empty?
+  run cmd
+  set :rakefile, nil if exists?(:rakefile)
+end
+
+
 namespace :deploy do
   task :start, :roles => :app do
     run "touch #{current_release}/tmp/restart.txt"
@@ -68,11 +79,6 @@ namespace :deploy do
   desc "Restart Resque Workers"
   task :restart_workers, :roles => :app do
     run_remote_rake "resque:restart_workers"
-  end
-
-  desc "Restart Resque scheduler"
-  task :restart_scheduler, :roles => :scheduler do
-    run_remote_rake "resque:restart_scheduler"
   end
 
 end
