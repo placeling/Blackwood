@@ -15,6 +15,8 @@ gem "geocoder"
 gem "rspec-rails", "~> 2.8.1" #needs these outside to prevent rake break
 gem 'ci_reporter'
 
+gem 'quiet_assets', :group => :development
+
 group :assets do
   gem 'sass-rails', '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'

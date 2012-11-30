@@ -1,5 +1,5 @@
 class User < ActiveResource::Base
-  # To change this template use File | Settings | File Templates.
+  include CachedResource
 
   self.site = BLACKWOOD_CONFIG['base_host']
 
