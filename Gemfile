@@ -26,7 +26,6 @@ end
 gem "redis", "~> 2.2"
 gem "redis-namespace"
 gem 'redis-rails'
-gem 'resque', :require => 'resque/server'
 
 gem "jquery-rails", "~> 2.1.3"
 
@@ -46,6 +45,8 @@ gem "twitter-bootstrap-rails"
 gem 'capistrano'
 gem "capistrano-ext"
 gem "rvm-capistrano", :require => false
+
+gem "foreman", "~> 0.60.2"
 
 # To use debugger
 # gem 'debugger'

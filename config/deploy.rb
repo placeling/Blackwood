@@ -9,6 +9,8 @@ before 'deploy:setup', 'rvm:install_rvm'
 before 'deploy:setup', 'rvm:install_ruby'
 before 'deploy:setup', "ubuntu:required_packages"
 before 'deploy:setup', 'ubuntu:service_gems'
+after "deploy:update", "foreman:export"
+after "deploy:update", "foreman:restart"
 
 after "deploy:create_symlink", "deploy:restart_workers"
 
@@ -76,11 +78,31 @@ namespace :deploy do
     run "touch #{current_release}/tmp/restart.txt"
   end
 
-  desc "Restart Resque Workers"
-  task :restart_workers, :roles => :app do
-    run_remote_rake "resque:restart_workers"
+end
+
+### Foreman-related snippet of `config/deploy.rb` below.
+### Rest of the file omitted!
+
+namespace :foreman do
+  desc "Export the Procfile to Ubuntu's upstart scripts"
+  task :export, :roles => :app do
+    run "cd /var/my-ossum-app && sudo bundle exec foreman export upstart /etc/init -a my-ossum-app -u ossum-user -l /var/my-ossum-app/log"
   end
 
+  desc "Start the application services"
+  task :start, :roles => :app do
+    sudo "start my-ossum-app"
+  end
+
+  desc "Stop the application services"
+  task :stop, :roles => :app do
+    sudo "stop my-ossum-app"
+  end
+
+  desc "Restart the application services"
+  task :restart, :roles => :app do
+    run "sudo start my-ossum-app || sudo restart my-ossum-app"
+  end
 end
 
 require './config/boot'

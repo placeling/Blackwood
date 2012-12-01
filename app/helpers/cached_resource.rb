@@ -14,7 +14,7 @@ module CachedResource
   module ClassMethods
 
     def cache_expires_in
-      60*60 #self.cache_for || 60
+      60*60*24 #expires after a day, by default
     end
 
     def find_with_cache(*arguments)

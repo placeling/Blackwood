@@ -1,0 +1,1 @@
+subscriber: bundle exec rake redis:subscriber
