@@ -12,8 +12,6 @@ before 'deploy:setup', 'ubuntu:service_gems'
 after "deploy:update", "foreman:export"
 after "deploy:update", "foreman:restart"
 
-after "deploy:create_symlink", "deploy:restart_workers"
-
 task :production do
   set :gateway, 'beagle.placeling.com:11235'
   server '10.122.167.104', :app, :web, :db, :scheduler, :primary => true
@@ -46,7 +44,7 @@ namespace :ubuntu do
     run 'sudo apt-get update'
     run 'sudo apt-get install git-core ruby  ruby-dev rubygems libxslt-dev libxml2-dev libcurl4-openssl-dev imagemagick nodejs'
     run 'sudo apt-get install zlib1g-dev libssl-dev libyaml-dev libsqlite3-0  libsqlite3-dev sqlite3 libxml2-dev libxslt-dev  autoconf libc6-dev ncurses-dev'
-    run 'sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl libtool libpcre3 libpcre3-dev'
+    run 'sudo apt-get install upstart build-essential bison openssl libreadline6 libreadline6-dev curl libtool libpcre3 libpcre3-dev'
   end
 
   task :service_gems, :roles => :app do
@@ -84,24 +82,25 @@ end
 ### Rest of the file omitted!
 
 namespace :foreman do
-  desc "Export the Procfile to Ubuntu's upstart scripts"
+  desc 'Export the Procfile to Ubuntu upstart scripts'
   task :export, :roles => :app do
-    run "cd /var/my-ossum-app && sudo bundle exec foreman export upstart /etc/init -a my-ossum-app -u ossum-user -l /var/my-ossum-app/log"
+    run "cd #{release_path} && sudo bundle exec foreman export upstart /etc/init -a #{application} -u #{user} -l #{release_path}/log/foreman"
   end
 
   desc "Start the application services"
   task :start, :roles => :app do
-    sudo "start my-ossum-app"
+    sudo "start #{application}"
   end
 
   desc "Stop the application services"
+
   task :stop, :roles => :app do
-    sudo "stop my-ossum-app"
+    sudo "stop #{application}"
   end
 
   desc "Restart the application services"
   task :restart, :roles => :app do
-    run "sudo start my-ossum-app || sudo restart my-ossum-app"
+    run "sudo start #{application} || sudo restart #{application}"
   end
 end
 

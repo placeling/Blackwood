@@ -5,7 +5,7 @@ namespace "redis" do
   task :subscriber => :environment do
     REDIS_CONFIG = YAML.load(File.open(Rails.root.join("config/subscribe_redis.yml")))[Rails.env]
 
-    redis_connect = Redis.new(REDIS_CONFIG.symbolize_keys!)
+    redis_connect = Redis.new(REDIS_CONFIG.symbolize_keys!.merge(:timeout => 0) )
     puts "subscribing to invalidations"
     redis_connect.subscribe("#{REDIS_CONFIG[:namespace]}:invalidations") do |on|
       on.message do |channel, msg|
