@@ -84,7 +84,7 @@ end
 namespace :foreman do
   desc 'Export the Procfile to Ubuntu upstart scripts'
   task :export, :roles => :app do
-    run "cd #{release_path} && rvmsudo env PATH=$PATH bundle exec foreman export upstart /etc/init -a #{application} -u #{user} -l #{release_path}/log/foreman"
+    run "cd #{release_path} && rvmsudo env PATH=$PATH bundle exec foreman export upstart /etc/init -e #{release_path}/config/foreman_#{rails_env}.env -a #{application} -u #{user} -l #{release_path}/log/foreman"
   end
 
   desc "Start the application services"
