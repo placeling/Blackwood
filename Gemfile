@@ -26,6 +26,7 @@ end
 gem "redis", "~> 2.2"
 gem "redis-namespace"
 gem 'redis-rails'
+gem 'resque', :require => 'resque/server'
 
 gem "jquery-rails", "~> 2.1.3"
 
