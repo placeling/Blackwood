@@ -47,7 +47,7 @@ module CachedResource
     end
 
     def perma_cache_key(*arguments)
-      "perma/#{name}-#{arguments.join('/')}".downcase
+      "perma/#{cache_key(arguments)}".downcase
     end
   end
 

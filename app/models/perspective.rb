@@ -4,6 +4,9 @@ class Perspective < ActiveResource::Base
   self.site = BLACKWOOD_CONFIG['base_host']
   self.prefix = "/publishers/:publisher_id/publisher_categories/:cat/"
 
+  Perspective::User = User
+  Perspective::Photo = Picture
+
   def self.query_near_for_user(username, category, lat, lng)
     Perspective.find(:all, :params => {:publisher_id => username, :cat => category , :lat => lat, :lng => lng} )
   end
