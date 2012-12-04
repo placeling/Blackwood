@@ -3,6 +3,11 @@ class Publisher < ActiveResource::Base
 
   self.site = BLACKWOOD_CONFIG['base_host']
 
+  class PublisherCategory < ActiveResource::Base
+    self.site = BLACKWOOD_CONFIG['base_host']
+  end
+
+
   def category_for(category)
     return self.publisher_categories.find {| cat | cat.slug == category }
   end
