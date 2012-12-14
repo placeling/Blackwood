@@ -4,7 +4,7 @@
 
     <% @publisher.publisher_categories.each_with_index do |category, i| %>
         <a href="./category/<%= category.slug %>" class="category">
-          <%= image_tag( category.filename ) %>
+          <%= image_tag( category.image_url ) %>
         </a>
 
         <% if i %2 == 1 %>

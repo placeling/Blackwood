@@ -23,7 +23,7 @@ class Perspective < ActiveResource::Base
   end
 
 
-  def as_json( context)
+  def as_json( context={} )
     #this is necessary to prevent the double nesting that seems to happen with activeresource as_json default calls
     attributes = self.attributes
     attributes = attributes.merge( self.place.as_json )
