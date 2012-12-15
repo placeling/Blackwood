@@ -73,4 +73,9 @@
   </div>
 </div>
 </body>
+
+<% if @publisher.google_analytics_code && ! @publisher.google_analytics_code.empty? %>
+    <%=  render :partial => "google_analytics", :locals => {:google_analytics_code => @publisher.google_analytics_code} %>
+<% end %>
+
 </html>
