@@ -32,7 +32,7 @@
               <a href="<%= @perspective.place.google_url %>" target="#" class="btn btn-primary"><%= t'place.hours_directions' %></a>&nbsp;
           <% end %>
           <% if @perspective.place.phone_number %>
-              <a href="tel:<%= @perspective.place.phone_number %>" class="btn "><%= t'place.call' %></a>&nbsp;
+              <a href="tel:<%= @perspective.place.phone_number %>" class="btn visible-phone"><%= t'place.call' %></a>&nbsp;
           <% end %>
         </div>
       </div>
