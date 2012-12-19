@@ -28,6 +28,18 @@ module CachedResource
       end
     end
 
+    def create_with_cache(*arguments, data)
+      begin
+        key = cache_key(arguments)
+        perma_key = perma_cache_key(arguments)
+
+        new_object = self.new( data )
+
+        Rails.cache.write(key, new_object, :expires_in => self.cache_expires_in)
+        Rails.cache.write(perma_key, new_object)
+      end
+    end
+
     def invalidate_cache(*arguments)
       key = cache_key(arguments)
       result = Rails.cache.read(key).try(:dup)

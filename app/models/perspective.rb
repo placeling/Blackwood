@@ -2,7 +2,7 @@ class Perspective < ActiveResource::Base
   include ActionView::Helpers::NumberHelper
   # To change this template use File | Settings | File Templates.
 
-  liquid_methods :name, :slug, :tags, :distance, :street_address
+  liquid_methods :name, :slug, :tags, :distance, :street_address, :google_url, :map_url, :phone_number, :photos, :memo
 
   self.site = BLACKWOOD_CONFIG['base_host']
   self.prefix = "/publishers/:publisher_id/publisher_categories/:cat/"
@@ -54,6 +54,19 @@ class Perspective < ActiveResource::Base
       return ""
     end
 
+  end
+
+  def phone_number
+    self.place.phone_number
+  end
+
+  def google_url
+    self.place.google_url
+  end
+
+  def map_url
+    #map_url.gsub("size=100x100", "size=320x150&maptype=terrain")
+    self.place.map_url
   end
 
   def as_json( context={} )
