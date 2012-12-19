@@ -11,12 +11,14 @@ class HomeController < ApplicationController
   def list
     @perspectives = Perspective.query_near_for_user(@base_user, params[:category],  @lat, @lng)
 
+    @publisher_category = @publisher.category_for( params[:category] )
+
     if @lat && @lng
       @perspectives.each do |perspective|
         #add distance to in meters
         perspective.distance = Geocoder::Calculations.distance_between([@lat, @lng], [perspective.place.location[0], perspective.place.location[1]], :units => :km)
       end
-      @perspectives = @perspectives.sort_by { |perspective| perspective.distance }
+      @perspectives = @perspectives.sort_by { |perspective| perspective.attributes['distance'] }
     end
 
     respond_to do |format|

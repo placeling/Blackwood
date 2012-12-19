@@ -1,6 +1,8 @@
 class User < ActiveResource::Base
   include CachedResource
 
+  liquid_methods :username
+
   User::Picture = Picture
   User::Perspective = Perspective
   User::Perspective::Place = Place
