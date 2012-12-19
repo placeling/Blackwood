@@ -4,6 +4,9 @@
   <title><%= @base_user %></title>
 
   <%= stylesheet_link_tag "application", :media => "all" %>
+
+  <link href="/style.css" media="all" rel="stylesheet" type="text/css" />
+
   <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
   <%= javascript_include_tag "application" %>
 
@@ -61,15 +64,6 @@
 
   <div>
     <%= yield %>
-    <% if @publisher.footerpng %>
-        <div class="row-fluid visible-phone">
-          <div class="span12">
-            <div style="text-align: center;">
-              <%=  image_tag( @publisher.footerpng ) %>
-            </div>
-          </div>
-        </div>
-    <% end %>
   </div>
 </div>
 </body>

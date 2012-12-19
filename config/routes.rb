@@ -8,6 +8,7 @@ Blackwood::Application.routes.draw do
   match "category/:category/mapdata" => 'home#mapdata'
   match "places/:id" => "home#place"
   match "ping" => 'home#ping'
+  match "/style" => 'home#style'
 
   constraints(Subdomain) do
     match '/' => 'home#index'
