@@ -28,6 +28,17 @@ module CachedResource
       end
     end
 
+    def invalidate_cache(*arguments)
+      key = cache_key(arguments)
+      result = Rails.cache.read(key).try(:dup)
+      if result
+        Rails.cache.delete( key )
+        return result
+      else
+        return nil
+      end
+    end
+
     private
 
     def find_with_read_through_cache(key, perma_key, *arguments)
