@@ -65,7 +65,6 @@ class Perspective < ActiveResource::Base
   end
 
   def map_url
-    #map_url.gsub("size=100x100", "size=320x150&maptype=terrain")
     self.place.map_url
   end
 
