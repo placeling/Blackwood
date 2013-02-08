@@ -17,6 +17,10 @@ namespace "redis" do
         puts "#invalidating key - [#{data['model']}/#{data['id']}]"
 
         $redis.del( "#{data['model']}/#{data['id']}".downcase )
+
+        if data['publisher']
+          Publisher.create_with_cache( data['id'], data['publisher'] )
+        end
       end
     end
   end
